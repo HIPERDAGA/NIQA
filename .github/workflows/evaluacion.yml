@@ -1,0 +1,25 @@
+name: Evaluar Calidad NIQE/PIQE
+
+on:
+  push:
+    paths:
+      - "data/**"
+      - "scripts/**"
+
+jobs:
+  evaluar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar evaluación
+        run: python scripts/evaluar_niqe_piqe.py
